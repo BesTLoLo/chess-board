@@ -1,0 +1,19 @@
+{
+  "name": "chess-scoreboard",
+  "version": "1.0.0",
+  "description": "An elegant chess scoreboard web application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["chess", "scoreboard", "web", "node", "express"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+} 

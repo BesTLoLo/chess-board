@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Scoreboard - Chess Tournament</title>
+    <link rel="stylesheet" href="scoreboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <i class="fas fa-trophy"></i>
+                    Tournament Scoreboard
+                </h1>
+                <p class="subtitle">Player rankings and statistics</p>
+                <div class="header-actions">
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Home
+                    </a>
+                    <a href="submit.html" class="submit-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Match
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="scoreboard-controls">
+                <div class="stats-summary" id="tournamentStats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalPlayers">0</div>
+                            <div class="stat-label">Players</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chess-board"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalMatches">0</div>
+                            <div class="stat-label">Matches</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="topPlayer">-</div>
+                            <div class="stat-label">Leader</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view-controls">
+                    <button class="refresh-btn" onclick="scoreboardManager.loadData()">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                    <button class="reset-btn" onclick="scoreboardManager.resetTournament()">
+                        <i class="fas fa-trash-alt"></i>
+                        Reset All
+                    </button>
+                </div>
+            </div>
+
+            <div class="scoreboard-table-container">
+                <div class="table-header">
+                    <h2>
+                        <i class="fas fa-list-ol"></i>
+                        Player Rankings
+                    </h2>
+                    <div class="table-info">
+                        <span id="lastUpdated">Updated: Just now</span>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="scoreboard-table" id="scoreboardTable">
+                        <thead>
+                            <tr>
+                                <th class="rank-col">
+                                    <i class="fas fa-hashtag"></i>
+                                    Rank
+                                </th>
+                                <th class="player-col">
+                                    <i class="fas fa-user"></i>
+                                    Player
+                                </th>
+                                <th class="wins-col sortable" onclick="scoreboardManager.sortBy('wins')">
+                                    <i class="fas fa-trophy"></i>
+                                    Wins
+                                </th>
+                                <th class="losses-col sortable" onclick="scoreboardManager.sortBy('losses')">
+                                    <i class="fas fa-times"></i>
+                                    Losses
+                                </th>
+                                <th class="draws-col sortable" onclick="scoreboardManager.sortBy('draws')">
+                                    <i class="fas fa-handshake"></i>
+                                    Draws
+                                </th>
+                                <th class="total-col sortable" onclick="scoreboardManager.sortBy('totalGames')">
+                                    <i class="fas fa-chess"></i>
+                                    Total
+                                </th>
+                                <th class="winrate-col sortable" onclick="scoreboardManager.sortBy('winRate')">
+                                    <i class="fas fa-percentage"></i>
+                                    Win Rate
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="scoreboardBody">
+                            <tr class="loading-row">
+                                <td colspan="7">
+                                    <div class="loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        Loading tournament data...
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <h2>
+                    <i class="fas fa-clock"></i>
+                    Recent Match Activity
+                </h2>
+                <div class="activity-list" id="recentActivity">
+                    <div class="loading">Loading recent matches...</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Chess Tournament Manager | Built with ♥ for chess enthusiasts</p>
+        </footer>
+    </div>
+
+    <script src="scoreboard.js"></script>
+</body>
+</html> 

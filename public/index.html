@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Tournament Manager</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <i class="fas fa-chess-board"></i>
+                    Chess Tournament Manager
+                </h1>
+                <p class="subtitle">Manage your chess tournament with ease</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="navigation-cards">
+                <div class="nav-card submit-card">
+                    <div class="nav-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h2>Submit Match Result</h2>
+                    <p>Record the outcome of a chess match between two players</p>
+                    <a href="submit.html" class="nav-btn">
+                        <i class="fas fa-edit"></i>
+                        Submit Score
+                    </a>
+                </div>
+
+                <div class="nav-card scoreboard-card">
+                    <div class="nav-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h2>View Scoreboard</h2>
+                    <p>See the tournament standings and player statistics</p>
+                    <a href="scoreboard.html" class="nav-btn">
+                        <i class="fas fa-table"></i>
+                        View Rankings
+                    </a>
+                </div>
+            </div>
+
+            <div class="quick-stats" id="quickStats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalPlayers">0</div>
+                    <div class="stat-label">Players</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalMatches">0</div>
+                    <div class="stat-label">Matches</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="recentActivity">Today</div>
+                    <div class="stat-label">Last Activity</div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Chess Tournament Manager | Built with ♥ for chess enthusiasts</p>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html> 
