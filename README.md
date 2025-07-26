@@ -1,144 +1,127 @@
-# ♟️ Chess Scoreboard
+# Chess Scoreboard
 
-An elegant and modern chess scoreboard web application built with Node.js, Express, HTML, CSS, and JavaScript. Track your chess matches with style!
+An elegant chess scoreboard web application with MongoDB support for persistent data storage.
 
-## ✨ Features
+## Features
 
-- **Real-time Score Tracking**: Keep track of wins for both players
-- **Player Customization**: Edit player names with ease
-- **Match History**: View detailed history of all games played
-- **Draw Support**: Record draw games
-- **Visual Feedback**: Beautiful animations and notifications
-- **Responsive Design**: Works perfectly on desktop and mobile devices
-- **Leading Player Indicator**: Visual highlight for the player currently ahead
-- **Confetti Celebration**: Fun confetti animation when a player wins
-- **Reset Functionality**: Reset the entire match when needed
+- Add and manage chess players
+- Record match results (wins/draws)
+- View player statistics and rankings
+- Admin authentication system
+- Persistent MongoDB storage
+- Clean, responsive web interface
 
-## 🚀 Quick Start
+## Setup
 
 ### Prerequisites
 
-- Node.js (version 14 or higher)
-- npm (comes with Node.js)
+- Node.js (v14 or higher)
+- MongoDB Atlas account (or local MongoDB instance)
 
 ### Installation
 
-1. **Clone or download this repository**
-   ```bash
-   git clone <your-repo-url>
-   cd chess-board
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd chess-board
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Configure environment variables
+   - Copy `env.example` to `.env`
+   - Update the MongoDB connection string with your credentials:
+   ```
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/chess-scoreboard?retryWrites=true&w=majority
+   ```
+   - Set your admin credentials:
+   ```
+   ADMIN_USERNAME=admin
+   ADMIN_PASSWORD=your_secure_password
    ```
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+4. Start the server
+```bash
+npm start
+```
 
-3. **Start the server**
-   ```bash
-   npm start
-   ```
-   
-   For development with auto-restart:
-   ```bash
-   npm run dev
-   ```
+For development with auto-restart:
+```bash
+npm run dev
+```
 
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
+## MongoDB Setup
 
-## 🎮 How to Use
+### Using MongoDB Atlas (Cloud)
 
-### Basic Operations
+1. Create a free MongoDB Atlas account at https://www.mongodb.com/cloud/atlas
+2. Create a new cluster
+3. Create a database user with read/write permissions
+4. Whitelist your IP address (or use 0.0.0.0/0 for development)
+5. Get your connection string from the "Connect" button
+6. Replace the placeholder values in your `.env` file
 
-1. **Update Player Names**: Click on the player name fields to edit them
-2. **Record a Win**: Click the "Win Game" button under the winning player
-3. **Record a Draw**: Click the "Draw Game" button in the controls section
-4. **Reset Match**: Click "Reset Match" to clear all scores and history
+### Using Local MongoDB
 
-### Interface Elements
+If you prefer to use a local MongoDB instance:
+```
+MONGODB_URI=mongodb://localhost:27017/chess-scoreboard
+```
 
-- **Player Cards**: Show player names, scores, and win buttons
-- **VS Section**: Displays current game number
-- **Match History**: Shows chronological list of all games played
-- **Visual Indicators**: Leading player gets a golden highlight
-- **Notifications**: Toast messages for all actions
-- **Confetti**: Celebration animation for wins
+## Usage
 
-## 🛠️ Development
+1. Open your browser and navigate to `http://localhost:3000`
+2. Use the admin credentials to log in to the admin panel
+3. Add players and record matches
+4. View the scoreboard with player statistics
 
-### Project Structure
+## API Endpoints
+
+### Public Endpoints
+- `GET /api/players` - Get all players with statistics
+- `GET /api/matches` - Get all matches
+
+### Protected Endpoints (require authentication)
+- `POST /api/players` - Add a new player
+- `POST /api/matches` - Record a new match
+- `DELETE /api/matches/:id` - Delete a match
+- `POST /api/reset` - Reset all tournament data
+
+### Authentication Endpoints
+- `POST /api/login` - Login with admin credentials
+- `POST /api/logout` - Logout
+- `GET /api/auth/check` - Check authentication status
+
+## Environment Variables
+
+- `PORT` - Server port (default: 3000)
+- `MONGODB_URI` - MongoDB connection string
+- `ADMIN_USERNAME` - Admin username for authentication
+- `ADMIN_PASSWORD` - Admin password for authentication
+- `SESSION_TIMEOUT` - Session timeout in milliseconds (default: 24 hours)
+
+## Project Structure
 
 ```
 chess-board/
-├── package.json          # Node.js dependencies and scripts
-├── server.js             # Express server and API endpoints
-├── public/               # Static web files
-│   ├── index.html        # Main HTML structure
-│   ├── style.css         # Elegant styling
-│   └── script.js         # Client-side functionality
-└── README.md             # This file
+├── config/
+│   └── database.js          # MongoDB connection configuration
+├── models/
+│   ├── Player.js           # Player model
+│   ├── Match.js            # Match model
+│   ├── Session.js          # Session model
+│   └── Counter.js          # Counter model for auto-incrementing IDs
+├── utils/
+│   └── helpers.js          # Utility functions
+├── public/                 # Static web files
+├── server.js              # Main server file
+├── package.json
+└── README.md
 ```
 
-### API Endpoints
+## License
 
-- `GET /api/game` - Get current game data
-- `POST /api/game/update` - Update player names
-- `POST /api/game/score` - Record a win or draw
-- `POST /api/game/reset` - Reset the entire match
-
-### Technologies Used
-
-- **Backend**: Node.js, Express.js
-- **Frontend**: Vanilla HTML, CSS, JavaScript
-- **Styling**: CSS3 with gradients, animations, and Flexbox
-- **Icons**: Font Awesome
-- **Fonts**: Google Fonts (Inter)
-
-## 🎨 Design Features
-
-- **Modern Glass-morphism**: Beautiful translucent cards with backdrop blur
-- **Gradient Backgrounds**: Elegant purple gradient background
-- **Smooth Animations**: Hover effects and transitions
-- **Responsive Layout**: Adapts to different screen sizes
-- **Color-coded Elements**: Different colors for different players and actions
-- **Interactive Feedback**: Visual and notification feedback for all actions
-
-## 📱 Responsive Design
-
-The scoreboard automatically adapts to different screen sizes:
-- **Desktop**: Full side-by-side layout
-- **Tablet**: Adjusted spacing and sizing
-- **Mobile**: Stacked layout with optimized touch targets
-
-## 🔧 Customization
-
-You can easily customize the appearance by modifying:
-- Colors in `public/style.css`
-- Player piece assignments (White/Black)
-- Animation durations and effects
-- Notification styles and messages
-
-## 🎯 Future Enhancements
-
-Potential improvements you could add:
-- Timer functionality for timed games
-- Tournament bracket support
-- Player statistics and analytics
-- Export match history
-- Sound effects
-- Multiple match formats
-- Database persistence
-- User accounts and profiles
-
-## 📄 License
-
-This project is licensed under the MIT License - feel free to use and modify as needed.
-
-## 🤝 Contributing
-
-Feel free to fork this project and submit pull requests for any improvements!
-
----
-
-**Enjoy your chess matches!** ♟️✨
+MIT License

@@ -229,8 +229,12 @@ class ScoreboardManager {
         }
 
         try {
+            const sessionId = localStorage.getItem('chess_session_id');
             const response = await fetch('/api/reset', {
-                method: 'POST'
+                method: 'POST',
+                headers: {
+                    'X-Session-Id': sessionId
+                }
             });
 
             if (response.ok) {

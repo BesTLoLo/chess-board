@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #00883c 0%, #000000 100%);
     min-height: 100vh;
     color: #333;
     line-height: 1.6;
@@ -49,8 +49,32 @@ body {
     gap: 15px;
 }
 
+.logo {
+    height: 60px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 136, 60, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.login-logo {
+    height: 80px;
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 136, 60, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.login-logo:hover {
+    transform: scale(1.1);
+}
+
 .title i {
-    color: #48bb78;
+    color: #00883c;
     font-size: 2rem;
 }
 
@@ -65,7 +89,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #00883c, #000000);
     color: white;
     text-decoration: none;
     padding: 10px 20px;
@@ -77,7 +101,7 @@ body {
 
 .back-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 136, 60, 0.3);
 }
 
 /* Main Content */
@@ -116,7 +140,7 @@ body {
 }
 
 .player-management h2 i {
-    color: #4299e1;
+    color: #00883c;
 }
 
 .input-group {
@@ -137,11 +161,11 @@ body {
 
 .input-group input:focus {
     outline: none;
-    border-color: #48bb78;
+    border-color: #00883c;
 }
 
 .add-btn {
-    background: linear-gradient(135deg, #48bb78, #38a169);
+    background: linear-gradient(135deg, #00883c, #006b2f);
     color: white;
     border: none;
     padding: 12px 20px;
@@ -157,7 +181,7 @@ body {
 
 .add-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(72, 187, 120, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 136, 60, 0.3);
 }
 
 .players-list {
@@ -186,7 +210,7 @@ body {
 }
 
 .player-item i {
-    color: #667eea;
+    color: #00883c;
 }
 
 /* Match Form Section */
@@ -210,7 +234,7 @@ body {
 }
 
 .match-form h2 i {
-    color: #ed8936;
+    color: #000000;
 }
 
 .players-selection {
@@ -251,7 +275,7 @@ body {
 
 .player-select-group select:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #00883c;
 }
 
 .player-icon {
@@ -271,7 +295,7 @@ body {
 }
 
 .white-pieces {
-    background: linear-gradient(135deg, #48bb78, #38a169);
+    background: linear-gradient(135deg, #00883c, #006b2f);
 }
 
 .black-pieces {
@@ -289,14 +313,14 @@ body {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #00883c, #000000);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-weight: 700;
     font-size: 0.9rem;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 136, 60, 0.3);
 }
 
 /* Result Selection */
@@ -353,19 +377,19 @@ body {
 }
 
 .result-option input:checked + .option-card {
-    border-color: #667eea;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    border-color: #00883c;
+    background: linear-gradient(135deg, rgba(0, 136, 60, 0.1), rgba(0, 0, 0, 0.1));
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 136, 60, 0.2);
 }
 
 .result-option input:checked + .option-card i {
-    color: #667eea;
+    color: #00883c;
 }
 
 .submit-btn {
     width: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #00883c, #000000);
     color: white;
     border: none;
     padding: 15px 25px;
@@ -382,7 +406,7 @@ body {
 
 .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 136, 60, 0.4);
 }
 
 /* Recent Matches Section */
@@ -406,7 +430,7 @@ body {
 }
 
 .recent-matches h2 i {
-    color: #9f7aea;
+    color: #00883c;
 }
 
 .matches-list {
@@ -432,11 +456,11 @@ body {
 }
 
 .match-item.win {
-    border-left-color: #48bb78;
+    border-left-color: #00883c;
 }
 
 .match-item.draw {
-    border-left-color: #4299e1;
+    border-left-color: #000000;
 }
 
 .match-info {
@@ -564,5 +588,13 @@ body {
     
     .option-card {
         padding: 15px;
+    }
+    
+    .logo {
+        height: 45px;
+    }
+    
+    .login-logo {
+        height: 60px;
     }
 } 

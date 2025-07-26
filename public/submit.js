@@ -3,12 +3,46 @@ class MatchSubmissionManager {
     constructor() {
         this.players = [];
         this.matches = [];
+        this.sessionId = null;
         this.init();
     }
 
     async init() {
+        // Check authentication first
+        const isAuthenticated = await this.checkAuthentication();
+        if (!isAuthenticated) {
+            window.location.href = 'login.html?redirect=submit.html&message=auth_required';
+            return;
+        }
+
         this.setupEventListeners();
         await this.loadData();
+    }
+
+    async checkAuthentication() {
+        this.sessionId = localStorage.getItem('chess_session_id');
+        if (!this.sessionId) return false;
+
+        try {
+            const response = await fetch('/api/auth/check', {
+                headers: {
+                    'X-Session-Id': this.sessionId
+                }
+            });
+
+            const data = await response.json();
+            return data.authenticated;
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+            return false;
+        }
+    }
+
+    getAuthHeaders() {
+        return {
+            'Content-Type': 'application/json',
+            'X-Session-Id': this.sessionId
+        };
     }
 
     setupEventListeners() {
@@ -88,9 +122,7 @@ class MatchSubmissionManager {
         try {
             const response = await fetch('/api/players', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.getAuthHeaders(),
                 body: JSON.stringify({ playerName })
             });
 
@@ -146,9 +178,7 @@ class MatchSubmissionManager {
         try {
             const response = await fetch('/api/matches', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: this.getAuthHeaders(),
                 body: JSON.stringify({
                     player1,
                     player2,
@@ -185,7 +215,10 @@ class MatchSubmissionManager {
 
         try {
             const response = await fetch(`/api/matches/${matchId}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: {
+                    'X-Session-Id': this.sessionId
+                }
             });
 
             if (response.ok) {

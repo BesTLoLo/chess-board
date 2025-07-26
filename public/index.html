@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess Tournament Manager</title>
+    <title>MNN Chess Tournament</title>
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,7 +13,7 @@
         <header class="header">
             <div class="header-content">
                 <h1 class="title">
-                    <i class="fas fa-chess-board"></i>
+                    <img src="images/logo.png" alt="Chess Tournament Logo" class="logo">
                     Chess Tournament Manager
                 </h1>
                 <p class="subtitle">Manage your chess tournament with ease</p>
@@ -28,10 +28,12 @@
                     </div>
                     <h2>Submit Match Result</h2>
                     <p>Record the outcome of a chess match between two players</p>
-                    <a href="submit.html" class="nav-btn">
-                        <i class="fas fa-edit"></i>
-                        Submit Score
-                    </a>
+                    <div class="nav-btn-container" id="submitBtnContainer">
+                        <a href="login.html" class="nav-btn login-required">
+                            <i class="fas fa-lock"></i>
+                            Login Required
+                        </a>
+                    </div>
                 </div>
 
                 <div class="nav-card scoreboard-card">
@@ -61,10 +63,23 @@
                     <div class="stat-label">Last Activity</div>
                 </div>
             </div>
+
+            <div class="auth-status" id="authStatus" style="display: none;">
+                <div class="auth-card">
+                    <div class="user-info">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Logged in as: <strong id="currentUser">admin</strong></span>
+                    </div>
+                    <button class="logout-btn" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </button>
+                </div>
+            </div>
         </main>
 
         <footer class="footer">
-            <p>&copy; 2024 Chess Tournament Manager | Built with ♥ for chess enthusiasts</p>
+            <p>&copy; 2025 MNN Chess Tournament | Built with ♥ for chess enthusiasts</p>
         </footer>
     </div>
 

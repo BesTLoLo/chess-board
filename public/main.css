@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #00883c 0%, #000000 100%);
     min-height: 100vh;
     color: #333;
     line-height: 1.6;
@@ -48,8 +48,32 @@ body {
     gap: 15px;
 }
 
+.logo {
+    height: 60px;
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 136, 60, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.login-logo {
+    height: 80px;
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 136, 60, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.login-logo:hover {
+    transform: scale(1.1);
+}
+
 .title i {
-    color: #667eea;
+    color: #00883c;
     font-size: 2.2rem;
 }
 
@@ -95,7 +119,7 @@ body {
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, #00883c, #000000);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -110,11 +134,11 @@ body {
 }
 
 .submit-card {
-    border-left: 4px solid #48bb78;
+    border-left: 4px solid #00883c;
 }
 
 .scoreboard-card {
-    border-left: 4px solid #ed8936;
+    border-left: 4px solid #000000;
 }
 
 .nav-icon {
@@ -131,11 +155,11 @@ body {
 }
 
 .submit-card .nav-icon {
-    background: linear-gradient(135deg, #48bb78, #38a169);
+    background: linear-gradient(135deg, #00883c, #006b2f);
 }
 
 .scoreboard-card .nav-icon {
-    background: linear-gradient(135deg, #ed8936, #dd6b20);
+    background: linear-gradient(135deg, #000000, #333333);
 }
 
 .nav-card h2 {
@@ -155,20 +179,20 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #00883c, #000000);
     color: white;
     text-decoration: none;
     padding: 12px 24px;
     border-radius: 12px;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 136, 60, 0.3);
 }
 
 .nav-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-    background: linear-gradient(135deg, #5a67d8, #6b46c1);
+    box-shadow: 0 10px 25px rgba(0, 136, 60, 0.4);
+    background: linear-gradient(135deg, #006b2f, #333333);
 }
 
 /* Quick Stats */
@@ -203,6 +227,69 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: 5px;
+}
+
+/* Authentication Status */
+.auth-status {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.auth-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2d3748;
+    font-size: 1rem;
+}
+
+.user-info i {
+    color: #00883c;
+    font-size: 1.1rem;
+}
+
+.user-info strong {
+    color: #00883c;
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #f56565, #e53e3e);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 101, 101, 0.3);
+}
+
+.nav-btn.login-required {
+    background: linear-gradient(135deg, #a0aec0, #718096);
+    cursor: pointer;
+}
+
+.nav-btn.login-required:hover {
+    background: linear-gradient(135deg, #00883c, #006b2f);
 }
 
 /* Footer */
@@ -262,5 +349,13 @@ body {
         width: 60px;
         height: 60px;
         font-size: 2rem;
+    }
+    
+    .logo {
+        height: 45px;
+    }
+    
+    .login-logo {
+        height: 60px;
     }
 } 

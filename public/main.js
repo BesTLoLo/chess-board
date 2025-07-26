@@ -1,11 +1,69 @@
 // Main page JavaScript for Chess Tournament Manager
 class TournamentOverview {
     constructor() {
+        this.isAuthenticated = false;
+        this.currentUser = null;
         this.init();
     }
 
     async init() {
+        await this.checkAuthentication();
         await this.loadQuickStats();
+        this.updateUI();
+    }
+
+    async checkAuthentication() {
+        const sessionId = localStorage.getItem('chess_session_id');
+        if (!sessionId) return;
+
+        try {
+            const response = await fetch('/api/auth/check', {
+                headers: {
+                    'X-Session-Id': sessionId
+                }
+            });
+
+            const data = await response.json();
+            if (data.authenticated) {
+                this.isAuthenticated = true;
+                this.currentUser = data.user;
+            }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+        }
+    }
+
+    updateUI() {
+        const submitBtnContainer = document.getElementById('submitBtnContainer');
+        const authStatus = document.getElementById('authStatus');
+        const currentUserElement = document.getElementById('currentUser');
+
+        if (this.isAuthenticated) {
+            // Show authenticated submit button
+            submitBtnContainer.innerHTML = `
+                <a href="submit.html" class="nav-btn">
+                    <i class="fas fa-edit"></i>
+                    Submit Score
+                </a>
+            `;
+
+            // Show auth status
+            authStatus.style.display = 'block';
+            if (currentUserElement) {
+                currentUserElement.textContent = this.currentUser.username;
+            }
+        } else {
+            // Show login required button
+            submitBtnContainer.innerHTML = `
+                <a href="login.html" class="nav-btn login-required">
+                    <i class="fas fa-lock"></i>
+                    Login Required
+                </a>
+            `;
+
+            // Hide auth status
+            authStatus.style.display = 'none';
+        }
     }
 
     async loadQuickStats() {
@@ -66,7 +124,30 @@ class TournamentOverview {
     }
 }
 
+// Global logout function
+async function handleLogout() {
+    const sessionId = localStorage.getItem('chess_session_id');
+    
+    try {
+        await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+                'X-Session-Id': sessionId
+            }
+        });
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+    
+    // Clear local session
+    localStorage.removeItem('chess_session_id');
+    
+    // Reload page to update UI
+    window.location.reload();
+}
+
 // Initialize when page loads
+let tournamentOverview;
 document.addEventListener('DOMContentLoaded', () => {
-    new TournamentOverview();
+    tournamentOverview = new TournamentOverview();
 }); 
