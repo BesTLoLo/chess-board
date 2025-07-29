@@ -289,11 +289,13 @@ body {
     color: white;
     font-size: 0.9rem;
     position: relative;
+    vertical-align: middle;
 }
 
 .scoreboard-table th i {
     margin-right: 8px;
     opacity: 0.9;
+    vertical-align: middle;
 }
 
 .sortable {
@@ -338,15 +340,15 @@ body {
 }
 
 .player-col {
-    min-width: 150px;
+    min-width: 100px;
 }
 
 .wins-col, .losses-col, .draws-col, .total-col {
-    width: 100px;
+    width: 150px;
     text-align: center;
 }
 
-.winrate-col {
+.points-col {
     width: 120px;
     text-align: center;
 }
@@ -410,17 +412,17 @@ body {
 .losses { color: #f56565; }
 .draws { color: #000000; }
 
-.win-rate {
+.points {
     font-weight: 600;
     padding: 4px 8px;
     border-radius: 6px;
     font-size: 0.9rem;
 }
 
-.win-rate.excellent { background: #c6f6d5; color: #22543d; }
-.win-rate.good { background: #bee3f8; color: #1a365d; }
-.win-rate.average { background: #fef5e7; color: #744210; }
-.win-rate.poor { background: #fed7d7; color: #742a2a; }
+.points.excellent { background: #c6f6d5; color: #22543d; }
+.points.good { background: #bee3f8; color: #1a365d; }
+.points.average { background: #fef5e7; color: #744210; }
+.points.poor { background: #fed7d7; color: #742a2a; }
 
 .loading-row td {
     text-align: center;
@@ -619,7 +621,7 @@ body {
         padding: 20px;
     }
     
-    .wins-col, .losses-col, .draws-col, .total-col, .winrate-col {
+    .wins-col, .losses-col, .draws-col, .total-col, .points-col {
         width: auto;
         min-width: 70px;
     }

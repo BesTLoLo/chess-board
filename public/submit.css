@@ -213,6 +213,29 @@ body {
     color: #00883c;
 }
 
+.player-stats {
+    margin-left: auto;
+}
+
+.delete-player {
+    background: #f56565;
+    color: white;
+    border: none;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
+.delete-player:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    background: #e53e3e;
+}
+
 /* Match Form Section */
 .match-form {
     background: rgba(255, 255, 255, 0.95);

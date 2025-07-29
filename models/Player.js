@@ -15,7 +15,5 @@ const playerSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Add indexes for better performance
-playerSchema.index({ name: 1 });
 
 module.exports = mongoose.model('Player', playerSchema); 

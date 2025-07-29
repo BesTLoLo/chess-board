@@ -3,7 +3,7 @@ class ScoreboardManager {
     constructor() {
         this.players = [];
         this.matches = [];
-        this.currentSort = { field: 'winRate', direction: 'desc' };
+        this.currentSort = { field: 'points', direction: 'desc' };
         this.init();
     }
 
@@ -52,10 +52,11 @@ class ScoreboardManager {
             let aValue = a[field];
             let bValue = b[field];
 
-            // Handle special cases
-            if (field === 'winRate') {
-                aValue = parseFloat(aValue);
-                bValue = parseFloat(bValue);
+            // Handle numeric fields
+            const numericFields = ['points', 'wins', 'losses', 'draws', 'totalGames'];
+            if (numericFields.includes(field)) {
+                aValue = parseInt(aValue || 0);
+                bValue = parseInt(bValue || 0);
             }
 
             // Sort logic
@@ -88,7 +89,7 @@ class ScoreboardManager {
         scoreboardBody.innerHTML = this.players.map((player, index) => {
             const rank = index + 1;
             const rankClass = this.getRankClass(rank);
-            const winRateClass = this.getWinRateClass(parseFloat(player.winRate));
+            const pointsClass = this.getPointsClass(player.points);
             const avatar = this.getPlayerAvatar(player.name);
 
             return `
@@ -103,19 +104,19 @@ class ScoreboardManager {
                         </div>
                     </td>
                     <td class="wins-col">
-                        <span class="stat-number-cell wins">${player.wins}</span>
+                        <span class="stat-number-cell wins">${player.wins || 0}</span>
                     </td>
                     <td class="losses-col">
-                        <span class="stat-number-cell losses">${player.losses}</span>
+                        <span class="stat-number-cell losses">${player.losses || 0}</span>
                     </td>
                     <td class="draws-col">
-                        <span class="stat-number-cell draws">${player.draws}</span>
+                        <span class="stat-number-cell draws">${player.draws || 0}</span>
                     </td>
                     <td class="total-col">
-                        <span class="stat-number-cell">${player.totalGames}</span>
+                        <span class="stat-number-cell">${player.totalGames || 0}</span>
                     </td>
-                    <td class="winrate-col">
-                        <span class="win-rate ${winRateClass}">${player.winRate}%</span>
+                    <td class="points-col">
+                        <span class="points ${pointsClass}">${player.points || 0}</span>
                     </td>
                 </tr>
             `;
@@ -132,11 +133,9 @@ class ScoreboardManager {
         // Top player
         const topPlayerElement = document.getElementById('topPlayer');
         if (this.players.length > 0) {
-            // Sort by win rate for top player
+            // Sort by points for top player
             const topPlayer = [...this.players].sort((a, b) => {
-                const aWinRate = parseFloat(a.winRate);
-                const bWinRate = parseFloat(b.winRate);
-                if (bWinRate !== aWinRate) return bWinRate - aWinRate;
+                if (b.points !== a.points) return b.points - a.points;
                 return b.wins - a.wins; // Tie-breaker: most wins
             })[0];
             
@@ -209,10 +208,11 @@ class ScoreboardManager {
         return 'default';
     }
 
-    getWinRateClass(winRate) {
-        if (winRate >= 75) return 'excellent';
-        if (winRate >= 60) return 'good';
-        if (winRate >= 40) return 'average';
+    getPointsClass(points) {
+        const pointValue = points || 0;
+        if (pointValue >= 10) return 'excellent';
+        if (pointValue >= 6) return 'good';
+        if (pointValue >= 3) return 'average';
         return 'poor';
     }
 

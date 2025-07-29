@@ -234,6 +234,32 @@ class MatchSubmissionManager {
         }
     }
 
+    async deletePlayer(playerName) {
+        if (!confirm(`Are you sure you want to remove "${playerName}" from the tournament? This action cannot be undone.`)) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/players/${encodeURIComponent(playerName)}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-Session-Id': this.sessionId
+                }
+            });
+
+            if (response.ok) {
+                this.showSuccess(`Player "${playerName}" removed successfully`);
+                await this.loadData();
+            } else {
+                const error = await response.json();
+                this.showError(error.error || 'Failed to remove player');
+            }
+        } catch (error) {
+            console.error('Error deleting player:', error);
+            this.showError('Failed to remove player');
+        }
+    }
+
     validatePlayerSelection() {
         const player1 = document.getElementById('player1Select').value;
         const player2 = document.getElementById('player2Select').value;
@@ -269,15 +295,25 @@ class MatchSubmissionManager {
             return;
         }
 
-        playersListContainer.innerHTML = this.players.map(player => `
-            <div class="player-item">
-                <i class="fas fa-user"></i>
-                <span>${player.name}</span>
-                <div class="player-stats">
-                    <small>${player.wins || 0}W ${player.losses || 0}L ${player.draws || 0}D</small>
+        playersListContainer.innerHTML = this.players.map(player => {
+            const hasMatches = (player.totalGames || 0) > 0;
+            const deleteButton = hasMatches ? '' : `
+                <button class="delete-player" onclick="matchManager.deletePlayer('${player.name.replace(/'/g, "\\'")}')">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            return `
+                <div class="player-item">
+                    <i class="fas fa-user"></i>
+                    <span>${player.name}</span>
+                    <div class="player-stats">
+                        <small>${player.wins || 0}W ${player.losses || 0}L ${player.draws || 0}D</small>
+                    </div>
+                    ${deleteButton}
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
 
     updatePlayerSelectors() {
@@ -344,7 +380,7 @@ class MatchSubmissionManager {
                         <div class="match-result">${resultText}</div>
                     </div>
                     <div class="match-time">${matchTime}</div>
-                    <button class="delete-match" onclick="matchManager.deleteMatch(${match.id})">
+                    <button class="delete-match" onclick="matchManager.deleteMatch(${match.matchId})">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>

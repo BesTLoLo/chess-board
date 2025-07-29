@@ -34,9 +34,5 @@ const matchSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Add indexes for better performance
-matchSchema.index({ matchId: 1 });
-matchSchema.index({ player1: 1, player2: 1 });
-matchSchema.index({ timestamp: -1 });
 
 module.exports = mongoose.model('Match', matchSchema); 

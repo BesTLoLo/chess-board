@@ -157,10 +157,10 @@ app.get('/api/players', async (req, res) => {
       };
     });
     
-    // Sort by win rate, then by total wins
+    // Sort by points, then by total wins
     playersWithStats.sort((a, b) => {
-      if (parseFloat(b.winRate) !== parseFloat(a.winRate)) {
-        return parseFloat(b.winRate) - parseFloat(a.winRate);
+      if (b.points !== a.points) {
+        return b.points - a.points;
       }
       return b.wins - a.wins;
     });
@@ -263,6 +263,12 @@ app.post('/api/matches', requireAuth, async (req, res) => {
 app.delete('/api/matches/:id', requireAuth, async (req, res) => {
   try {
     const matchId = parseInt(req.params.id);
+    
+    // Validate that the ID is a valid number
+    if (isNaN(matchId)) {
+      return res.status(400).json({ error: 'Invalid match ID format' });
+    }
+    
     const match = await Match.findOneAndDelete({ matchId });
     
     if (!match) {
@@ -272,6 +278,41 @@ app.delete('/api/matches/:id', requireAuth, async (req, res) => {
     res.json({ message: 'Match deleted successfully' });
   } catch (error) {
     console.error('Delete match error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.delete('/api/players/:name', requireAuth, async (req, res) => {
+  try {
+    const playerName = decodeURIComponent(req.params.name);
+    
+    // Check if player exists
+    const player = await Player.findOne({ name: playerName });
+    if (!player) {
+      return res.status(404).json({ error: 'Player not found' });
+    }
+    
+    // Check if player has any matches
+    const matches = await Match.find({
+      $or: [
+        { player1: playerName },
+        { player2: playerName }
+      ]
+    });
+    
+    if (matches.length > 0) {
+      return res.status(400).json({ 
+        error: 'Cannot delete player who has played matches',
+        matches: matches.length
+      });
+    }
+    
+    // Delete the player
+    await Player.findOneAndDelete({ name: playerName });
+    
+    res.json({ message: 'Player deleted successfully' });
+  } catch (error) {
+    console.error('Delete player error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });

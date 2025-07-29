@@ -36,9 +36,9 @@ function calculatePlayerStats(matches, playerName) {
   });
 
   const totalGames = wins + losses + draws;
-  const winRate = totalGames > 0 ? ((wins / totalGames) * 100).toFixed(1) : 0;
+  const points = (wins * 2) + (draws * 1) + (losses * 0); // Win=2, Draw=1, Loss=0
 
-  return { wins, losses, draws, totalGames, winRate };
+  return { wins, losses, draws, totalGames, points };
 }
 
 module.exports = {
